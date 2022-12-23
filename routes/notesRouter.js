@@ -14,7 +14,7 @@ noteApp.post('/', (req, res) => {
     const newNotes = {
       title,
       text,
-      notes_id: uuidv4(),
+      id: uuidv4(),
     };
 
     readAndAppend(newNotes, './db/db.json');
@@ -30,13 +30,13 @@ noteApp.post('/', (req, res) => {
   }
 });
 
-noteApp.get('/:notes_id', (req, res) => {
-  if (req.params.notes_id) {
+noteApp.get('/:id', (req, res) => {
+  if (req.params.id) {
     console.info(`${req.method} request received to get a single note`);
-    const noteId = req.params.notes_id;
+    const noteId = req.params.id;
     for (let i = 0; i < note.length; i++) {
       const currentNote = note[i];
-      if (currentNote.notes_id === noteId) {
+      if (currentNote.id === noteId) {
         res.json(currentNote);
         return;
       }
